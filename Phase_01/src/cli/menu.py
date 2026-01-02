@@ -37,6 +37,8 @@ class MenuSystem:
                 self._sort_tasks()
             elif choice == "7":
                 self._search_tasks()
+            elif choice == "8":
+                self._mark_task_completed()
             elif choice == "q" or choice == "Q":
                 self._exit_application()
             else:
@@ -55,6 +57,7 @@ class MenuSystem:
         print("5. Filter Tasks")
         print("6. Sort Tasks")
         print("7. Search Tasks")
+        print("8. Mark Task as Completed")
         print("Q. Quit")
         print("\n" + "="*50)
 
@@ -355,6 +358,57 @@ class MenuSystem:
             self.renderer.print_task_list(matching_tasks, f"Search Results for '{keyword}'")
         else:
             self.renderer.print_empty_state(f"No tasks found containing '{keyword}'")
+
+        input("\nPress Enter to continue...")
+
+    def _mark_task_completed(self):
+        """
+        Handle marking a task as completed.
+        This method handles the proper state transitions to mark a task as completed,
+        including transitioning from PENDING to IN_PROGRESS first if necessary.
+        """
+        self.renderer.clear_screen()
+        self.renderer.print_header("Mark Task as Completed")
+
+        if not self.task_manager.get_all_tasks():
+            self.renderer.print_warning("No tasks available to mark as completed.")
+            input("\nPress Enter to continue...")
+            return
+
+        self._view_tasks()
+        task_id_str = self._get_user_input("Enter task ID to mark as completed: ")
+        try:
+            task_id = int(task_id_str)
+        except ValueError:
+            self.renderer.print_error("Invalid task ID. Must be a number.")
+            input("\nPress Enter to continue...")
+            return
+
+        task = self.task_manager.get_task(task_id)
+        if not task:
+            self.renderer.print_error(f"Task with ID {task_id} not found.")
+            input("\nPress Enter to continue...")
+            return
+
+        if task.status == TaskStatus.COMPLETED:
+            self.renderer.print_warning(f"Task with ID {task_id} is already completed.")
+            input("\nPress Enter to continue...")
+            return
+
+        try:
+            # If task is PENDING, we need to transition it to IN_PROGRESS first
+            if task.status == TaskStatus.PENDING:
+                self.task_manager.update_task(task_id, status=TaskStatus.IN_PROGRESS)
+                self.renderer.print_info(f"Task {task_id} transitioned to IN_PROGRESS.")
+
+            # Now transition to COMPLETED
+            updated_task = self.task_manager.update_task(task_id, status=TaskStatus.COMPLETED)
+            if updated_task:
+                self.renderer.print_success(f"Task {task_id} marked as completed successfully!")
+            else:
+                self.renderer.print_error("Failed to mark task as completed.")
+        except ValueError as e:
+            self.renderer.print_error(f"Error marking task as completed: {e}")
 
         input("\nPress Enter to continue...")
 
