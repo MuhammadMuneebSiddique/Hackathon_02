@@ -14,7 +14,7 @@ if not DATABASE_URL or "postgresql" not in DATABASE_URL.lower():
     DATABASE_URL = "sqlite:///./todo_app.db"
 
 # Create engine
-engine = create_engine(DATABASE_URL, echo=True)
+engine = create_engine(DATABASE_URL, echo=True,pool_pre_ping=True,)
 
 def get_session() -> Generator[Session, None, None]:
     """Provide a transactional scope around a series of operations."""
