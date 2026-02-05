@@ -3,15 +3,15 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ClipboardList, Plus, Circle, ClipboardCheck, ChartBar } from "lucide-react"
-import DashBoardSideBar from "@/app/components/dashboardSideBar"
-import AddNewTask from "@/app/components/taskForm"
-import MyTasks from "@/app/components/myTasks"
-import VitalTasks from "@/app/components/vitalTasks"
-import CompletedTasks from "@/app/components/completedTasks"
-import ViewTask from "@/app/components/viewTask"
-import SettingsPage from "@/app/setting/page"
-import { useTaskContext } from '@/context/TaskContext';
-import { getSessionData } from '@/lib/authentication-methods';
+import DashBoardSideBar from "../components/dashboardSideBar"
+import AddNewTask from "../components/taskForm"
+import MyTasks from "../components/myTasks"
+import VitalTasks from "../components/vitalTasks"
+import CompletedTasks from "../components/completedTasks"
+import ViewTask from "../components/viewTask"
+import SettingsPage from "../setting/page"
+import { useTaskContext } from '../../context/TaskContext';
+import { getSessionData } from '../../util/authentication-methods';
 
 const DashboardCom = ({ showTaskForm, showViewTask, setSelectedTask, handlePage }) => {
   const { tasks, loading, error } = useTaskContext(); // Get tasks from context

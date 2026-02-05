@@ -1,9 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useTaskContext } from '@/context/TaskContext';
-import AddNewTask from './taskForm';
-import ConfirmationModal from './confirmationModal';
+import { useTaskContext } from '../../context/TaskContext';
 import { Circle } from 'lucide-react';
 
 export default function SharedTaskList({ taskCategory, title, taskFilter, onViewTask, onTaskSelected, onNavigateToTasks }) {

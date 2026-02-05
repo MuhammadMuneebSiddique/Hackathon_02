@@ -1,5 +1,5 @@
 import TaskLayout from './TaskLayout';
-import { TaskProvider } from '@/context/TaskContext';
+import { TaskProvider } from '../../context/TaskContext';
 
 export default function MyTasks() {
   // No filter - show all tasks

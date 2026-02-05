@@ -1,7 +1,7 @@
 
 
 import TaskLayout from './TaskLayout';
-import { TaskProvider } from '@/context/TaskContext';
+import { TaskProvider } from '../../context/TaskContext';
 
 export default function CompletedTasks() {
   // Filter for completed tasks - check both status and is_completed field

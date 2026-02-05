@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { getSessionData } from '@/lib/authentication-methods';
-import MyTasks from '@/app/components/myTasks';
+import { getSessionData } from '../../util/authentication-methods';
+import MyTasks from '../components/myTasks';
 
 export default function TasksPage() {
   const router = useRouter();

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useTaskContext } from '@/context/TaskContext';
+import { useTaskContext } from '../../context/TaskContext';
 import { Circle, CircleCheckBig } from 'lucide-react';
 import AddNewTask from './taskForm'; // Import the existing TaskForm component
 import ConfirmationModal from './confirmationModal'; // Import the dashboard's confirmation modal

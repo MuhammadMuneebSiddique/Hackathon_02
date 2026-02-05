@@ -13,19 +13,14 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
-
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./*"]
-    },
-
-    "ignoreDeprecations": "6.0",
-
     "plugins": [
       {
         "name": "next"
       }
-    ]
+    ],
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "include": [
     "next-env.d.ts",
@@ -33,11 +28,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts",
-    "app/page.jsx",
-    "app/layout.tsx",
-    "auth.js",
-    "util/authentication-methods.ts"
-  ],
+    "**/*.mts"
+, "app/page.jsx", "app/layout.tsx", "auth.js", "lib/authentication-methods.ts"  ],
   "exclude": ["node_modules"]
 }

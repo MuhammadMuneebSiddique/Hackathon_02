@@ -1,5 +1,5 @@
 import TaskLayout from './TaskLayout';
-import { TaskProvider } from '@/context/TaskContext';
+import { TaskProvider } from '../../context/TaskContext';
 
 export default function VitalTasks() {
   // Filter for tasks with extreme priority

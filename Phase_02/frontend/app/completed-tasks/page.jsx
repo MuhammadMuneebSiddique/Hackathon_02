@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { getSessionData } from '@/lib/authentication-methods';
-import CompletedTasks from '@/app/components/completedTasks';
+import { getSessionData } from '../../util/authentication-methods';
+import CompletedTasks from '../../app/components/completedTasks';
 
 export default function CompletedTasksPage() {
   const router = useRouter();

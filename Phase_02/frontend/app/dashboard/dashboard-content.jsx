@@ -2,15 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { getSessionData } from '@/lib/authentication-methods';
 import { ClipboardList, Plus, Circle, ClipboardCheck, ChartBar } from "lucide-react"
-import DashBoardSideBar from "@/app/components/dashboardSideBar"
-import MyTasks from "@/app/components/myTasks"
-import VitalTasks from "@/app/components/vitalTasks"
-import CompletedTasks from "@/app/components/completedTasks"
-import SettingsPage from "@/app/setting/page"
-import { TaskProvider } from '@/context/TaskContext'; // Wrap with TaskProvider
-import SharedTaskList from '@/app/components/sharedTaskList';
+import DashBoardSideBar from "../components/dashboardSideBar"
+import MyTasks from "../components/myTasks"
+import VitalTasks from "../components/vitalTasks"
+import CompletedTasks from "../components/completedTasks"
+import SettingsPage from "../setting/page"
+import { TaskProvider } from '../../context/TaskContext'; // Wrap with TaskProvider
+import SharedTaskList from '../components/sharedTaskList';
 
 export default function DashboardContent({ session }) {
   const [isTaskForm, setTaskForm] = useState(false)

@@ -1,6 +1,6 @@
 import { CircleCheckBig } from "lucide-react";
 import { useState } from 'react';
-import { tasksAPI } from '@/lib/api';
+import { tasksAPI } from '../../util/api';
 import ConfirmationModal from './confirmationModal';
 
 export default function ViewTask({isActive, setIsActive, task, onTaskUpdated, onTaskDeleted, setShowEditTask, setTaskToEdit}) {

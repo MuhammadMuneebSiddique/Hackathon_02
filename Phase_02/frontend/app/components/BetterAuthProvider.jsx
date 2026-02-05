@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, createContext, useContext } from 'react';
-import { useSession } from '@/util/better-auth-client'
+import { useSession } from '../../util/better-auth-client'
 
 const BetterAuthContext = createContext();
 

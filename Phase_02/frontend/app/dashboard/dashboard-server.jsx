@@ -1,5 +1,5 @@
-import { getTasksServer } from '@/lib/server-tasks';
-import { getSessionData } from '@/lib/authentication-methods';
+import { getTasksServer } from '../../util/server-tasks';
+import { getSessionData } from '../../util/authentication-methods';
 import DashboardClient from './dashboard-client';
 
 export default async function DashboardServer() {
