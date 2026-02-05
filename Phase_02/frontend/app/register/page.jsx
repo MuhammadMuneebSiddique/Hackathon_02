@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import registerImage from "../../public/R 2.png"
+import registerImage from "@/public/R 2.png"
 import Image from 'next/image';
-import { register as authRegister } from '../../lib/authentication-methods';
+import { register as authRegister } from '@/lib/authentication-methods';
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState({

@@ -3,9 +3,9 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import loginImage from "../../public/ach3 1.png";
+import loginImage from "@?public/ach3 1.png";
 import Image from "next/image";
-import { login as authLogin, getSessionData } from '../../lib/authentication-methods';
+import { login as authLogin, getSessionData } from '@/lib/authentication-methods';
 
 export default function LoginClient() {
   const [formData, setFormData] = useState({
