@@ -18,11 +18,11 @@ security = HTTPBearer()
 SECRET_KEY = os.getenv("BETTER_AUTH_SECRET", "")
 ALGORITHM = os.getenv("ALGORITHM")
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7  # 7 days as per requirement
-JWKS_URL = "http://localhost:3000/api/auth/jwks"
+JWKS_URL = "https://hackathon-02-kq6u.vercel.app/api/auth/jwks"
 
 # IMPORTANT: these must match your frontend domain
-ISSUER = "http://localhost:3000"
-AUDIENCE = "http://localhost:3000"
+ISSUER = "https://hackathon-02-kq6u.vercel.app"
+AUDIENCE = "https://hackathon-02-kq6u.vercel.app"
 
 jwk_client = PyJWKClient(JWKS_URL)
 
