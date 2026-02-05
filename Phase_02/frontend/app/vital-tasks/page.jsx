@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { getSessionData } from '@/lib/authentication-methods';
+import { getSessionData } from '../../lib/authentication-methods';
 import VitalTasks from '../components/vitalTasks';
 
 export default function VitalTasksPage() {

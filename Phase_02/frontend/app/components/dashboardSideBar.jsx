@@ -9,7 +9,7 @@ import {
   LaptopMinimalCheck,
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { getSessionData, logout } from '@/lib/authentication-methods';
+import { getSessionData, logout } from '../../lib/authentication-methods';
 import { useRouter } from 'next/navigation';
 
 

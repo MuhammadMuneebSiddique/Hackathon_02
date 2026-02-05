@@ -1,8 +1,8 @@
 'use client';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { getSessionData } from '@/lib/authentication-methods';
-import { authClient } from '@/lib/better-auth-client';
+import { getSessionData } from '../../lib/authentication-methods';
+import { authClient } from '../../lib/better-auth-client';
 
 
 export default function AccountInformation() {

@@ -1,7 +1,7 @@
 
 'use client';
 import { useState, useEffect } from 'react';
-import { tasksAPI } from '@/lib/api';
+import { tasksAPI } from "../../lib/api"
 import ConfirmationModal from './confirmationModal';
 
 export default function AddNewTask({isActive, setIsActive, onTaskCreated, taskToEdit}) {
