@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useReducer, useCallback, useEffect } from 'react';
-import { tasksAPI } from '../app/lib/api';
+import { tasksAPI } from '../util/api';
 
 const TaskContext = createContext();
 

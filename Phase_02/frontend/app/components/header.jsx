@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 import { TextAlignJustify, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { getSessionData, logout } from '@/app/lib/authentication-methods';
+import { getSessionData, logout } from '@/util/authentication-methods';
 import { useRouter } from 'next/navigation';
 
 export  default function Header(){

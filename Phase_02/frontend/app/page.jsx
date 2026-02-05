@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { getCurrentUser, isAuthenticated } from '@/app/lib/authentication-methods';
+import { getCurrentUser, isAuthenticated } from '@/util/authentication-methods';
 
 export default function Home() {
   const router = useRouter();
