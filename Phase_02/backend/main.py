@@ -9,7 +9,7 @@ import logging
 
 from src.database.database import create_db_and_tables
 from src.routes import tasks
-from src.utils.errors import TodoException, setup_error_handlers
+from src.utils.errors import setup_error_handlers
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -21,10 +21,14 @@ app = FastAPI(
     version="1.0.0"
 )
 
+origins = [
+    "https://hackathon-02-kq6u.vercel.app/"
+]
+
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, restrict this to your frontend URL
+    allow_origins=origins,  # In production, restrict this to your frontend URL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
