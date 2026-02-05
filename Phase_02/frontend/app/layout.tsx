@@ -4,7 +4,7 @@ import "./globals.css";
 import { BetterAuthProvider } from "@/app/components/BetterAuthProvider";
 import { TaskProvider } from "@/context/TaskContext";
 import Header from "@/app/components/header"
-import { getSessionData } from "@/lib/authentication-methods";
+import { getSessionData } from "@/app/lib/authentication-methods";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

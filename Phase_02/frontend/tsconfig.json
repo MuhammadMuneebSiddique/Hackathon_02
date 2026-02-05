@@ -37,7 +37,7 @@
     "app/page.jsx",
     "app/layout.tsx",
     "auth.js",
-    "lib/authentication-methods.ts"
+    "app/lib/authentication-methods.ts"
   ],
   "exclude": ["node_modules"]
 }
