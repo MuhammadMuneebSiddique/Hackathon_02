@@ -3,16 +3,19 @@ ChatService for AI Chatbot.
 
 Handles running the AI agent with context and MCP tools.
 """
-import logging
+import logging, os
 from typing import List, Optional
 from sqlmodel import Session
 
 from ..agent.config import get_model, get_run_config
 from ..agent.instructions import get_agent_instructions
 from ..models.message import Message
+from dotenv import load_dotenv
 
 logger = logging.getLogger(__name__)
+load_dotenv()
 
+MCP_URL = os.getenv("MCP_URL")
 
 class ChatService:
     """Service class for chat operations with AI agent."""
@@ -63,7 +66,7 @@ class ChatService:
             # The MCP server exposes all task management tools at /mcp endpoint
             # SSE (Server-Sent Events) requires Accept: text/event-stream header
             mcp_params = MCPServerStreamableHttpParams(
-                url="http://localhost:9000/mcp",
+                url=MCP_URL,
                 headers={
                     "Accept": "text/event-stream",
                     "Content-Type": "application/json"
