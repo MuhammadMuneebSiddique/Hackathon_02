@@ -16,7 +16,7 @@ import { getAuthToken, getSessionData } from '../../util/authentication-methods'
 import { authToken } from '../../util/better-auth-client';
 
 const DashboardCom = ({ showTaskForm, showViewTask, setSelectedTask, handlePage }) => {
-  const { tasks, loading, error } = useTaskContext(); // Get tasks from context
+  const { tasks, loading, error, fetchTasks } = useTaskContext(); // Get tasks from context
 
   const getPriorityColor = (priority) => {
     switch(priority?.toLowerCase()) {
@@ -79,7 +79,7 @@ const DashboardCom = ({ showTaskForm, showViewTask, setSelectedTask, handlePage 
                 <div className="text-center py-[2vw] text-red-500">Error: {error}</div>
               ) : tasks.length > 0 ? (
                 <>
-                  {tasks.slice(0, 3).map((task) => (
+                  {tasks.slice(0, 2).map((task) => (
                     <div
                       key={task.id}
                       onClick={() => {
@@ -103,7 +103,7 @@ const DashboardCom = ({ showTaskForm, showViewTask, setSelectedTask, handlePage 
                       </div>
                     </div>
                   ))}
-                  {tasks.length > 3 && (
+                  {tasks.length > 2 && (
                     <div className="text-center">
                       <button
                         onClick={() => handlePage("tasks")}
@@ -193,7 +193,7 @@ const DashboardCom = ({ showTaskForm, showViewTask, setSelectedTask, handlePage 
 
             {tasks.filter(t => t.status?.toLowerCase() === 'completed' || t.is_completed).length > 0 ? (
               <>
-                {tasks.filter(t => t.status?.toLowerCase() === 'completed' || t.is_completed).slice(0, 2).map((task) => (
+                {tasks.filter(t => t.status?.toLowerCase() === 'completed' || t.is_completed).slice(0, 1).map((task) => (
                   <div key={task.id} className="flex items-start rounded-[1em] gap-[1vw] border-[0.1em] p-[1em] border-[#A1A3AB] pb-[1vw] mb-[1vw]">
                     <Circle className='w-[1.4em] h-[1.4em] text-[#05A301]' />
                     <div className="flex flex-col flex-1">
@@ -207,7 +207,7 @@ const DashboardCom = ({ showTaskForm, showViewTask, setSelectedTask, handlePage 
                     </div>
                   </div>
                 ))}
-                {tasks.filter(t => t.status?.toLowerCase() === 'completed' || t.is_completed).length > 2 && (
+                {tasks.filter(t => t.status?.toLowerCase() === 'completed' || t.is_completed).length > 1 && (
                   <div className="text-center">
                     <button
                       onClick={() => handlePage("completed")}
@@ -231,6 +231,7 @@ const DashboardCom = ({ showTaskForm, showViewTask, setSelectedTask, handlePage 
 };
 
 export default function DashboardClient() {
+  const { fetchTasks } = useTaskContext();
   const [isTaskForm, setTaskForm] = useState(false)
   const [isViewTask, setViewTask] = useState(false)
   const [page, setPage] = useState("dashboard")
@@ -244,13 +245,6 @@ export default function DashboardClient() {
 
   // Check session on component mount
   useEffect(() => {
-
-    const getToken = async () => {
-      const token = await authToken()
-      console.log("====================",token)
-    }
-    getToken()
-
     const checkAuth = async () => {
       setIsLoading(true);
       try {
@@ -302,7 +296,7 @@ export default function DashboardClient() {
 
   if(page == "dashboard"){
     return(
-      <div className='sm:grid bg-zinc-50 sm:grid-cols-[1fr_4.5fr] '>
+      <div className='grid h-full relative bg-zinc-50 grid-cols-1 sm:grid-cols-[1fr_4.5fr] '>
         <DashBoardSideBar handlePage={handlePage} page={page} />
         <DashboardCom session={session} showTaskForm={showTaskForm} showViewTask={showViewTask} setSelectedTask={setSelectedTask} handlePage={handlePage} />
         <AddNewTask
@@ -311,15 +305,15 @@ export default function DashboardClient() {
             setTaskForm(state);
             setShowEditTask(state); // Sync both states
           }}
-          onTaskCreated={() => {}}
+          onTaskCreated={() => fetchTasks()}
           taskToEdit={taskToEdit}
         />
         <ViewTask
           isActive={isViewTask}
           setIsActive={setViewTask}
           task={selectedTask}
-          onTaskUpdated={() => {}}
-          onTaskDeleted={() => {}}
+          onTaskUpdated={() => fetchTasks()}
+          onTaskDeleted={() => fetchTasks()}
           setShowEditTask={setShowEditTask}
           setTaskToEdit={setTaskToEdit}
         />
@@ -327,35 +321,35 @@ export default function DashboardClient() {
     )
   }else if("tasks" == page){
     return(
-      <div className='sm:grid bg-zinc-50 sm:grid-cols-[1fr_4.5fr] '>
+      <div className='grid h-full relative bg-zinc-50 grid-cols-1 sm:grid-cols-[1fr_4.5fr] '>
         <DashBoardSideBar handlePage={handlePage} page={page} />
         <MyTasks />
       </div>
     )
   }else if("vital" == page){
     return(
-      <div className='sm:grid bg-zinc-50 sm:grid-cols-[1fr_4.5fr] '>
+      <div className='grid h-full relative bg-zinc-50 grid-cols-1 sm:grid-cols-[1fr_4.5fr] '>
         <DashBoardSideBar handlePage={handlePage} page={page} />
         <VitalTasks />
       </div>
     )
   }else if("completed" == page){
     return(
-      <div className='sm:grid bg-zinc-50 sm:grid-cols-[1fr_4.5fr] '>
+      <div className='grid h-full relative bg-zinc-50 grid-cols-1 sm:grid-cols-[1fr_4.5fr] '>
         <DashBoardSideBar handlePage={handlePage} page={page} />
         <CompletedTasks />
       </div>
     )
   }else if("settings" == page){
     return(
-      <div className='sm:grid bg-zinc-50 sm:grid-cols-[1fr_4.5fr] '>
+      <div className='grid h-full relative bg-zinc-50 grid-cols-1 sm:grid-cols-[1fr_4.5fr] '>
         <DashBoardSideBar handlePage={handlePage} page={page} />
         <SettingsPage />
       </div>
     )
   }else if("chat" == page){
     return(
-      <div className='sm:grid bg-zinc-50 sm:grid-cols-[1fr_4.5fr] '>
+      <div className='grid h-full relative bg-zinc-50 grid-cols-1 sm:grid-cols-[1fr_4.5fr] '>
         <DashBoardSideBar handlePage={handlePage} page={page} />
         <ChatPage />
       </div>

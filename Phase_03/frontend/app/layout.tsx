@@ -32,7 +32,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`sm:h-screen grid grid-rows-[1fr_9fr] sm:overflow-hidden relative ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <BetterAuthProvider>
           <TaskProvider>

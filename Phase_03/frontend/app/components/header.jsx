@@ -71,7 +71,7 @@ export  default function Header(){
 
   if (session){
     return (
-        <header className="w-full h-[12vw] mobile:h-[6vw] md:h-[5vw] lg:h-[4.5vw] flex justify-between items-center px-[1.5vw] bg-[#f5f5f5] border-b border-gray-200 shadow-sm text-[3vw] mobile:text-[1.5vw] sm:text-[1.4vw] md:text-[1.3vw] lg:text-[1vw]">
+        <header className="w-full py-[1vw] mobile:h-[6vw] md:h-[5vw] lg:h-[4.5vw] flex justify-between items-center px-[1.5vw] bg-[#f5f5f5] border-b border-gray-200 shadow-sm text-[3vw] mobile:text-[1.5vw] sm:text-[1.4vw] md:text-[1.3vw] lg:text-[1vw]">
 
         {/* --- Left Section: Brand --- */}
         <div className="flex items-center">

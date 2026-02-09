@@ -1,5 +1,6 @@
 "use client";
 
+import { SendHorizontal } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 export default function ChatInput({ onSendMessage, disabled }) {
@@ -30,7 +31,7 @@ export default function ChatInput({ onSendMessage, disabled }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-3 max-w-3xl mx-auto">
+    <form onSubmit={handleSubmit} className="flex items-end gap-3 mx-auto">
       <div className="flex-1 relative">
         <textarea
           ref={textareaRef}
@@ -39,15 +40,15 @@ export default function ChatInput({ onSendMessage, disabled }) {
           onKeyDown={handleKeyDown}
           placeholder="Type your message... (Shift+Enter for new line)"
           disabled={disabled}
-          rows={1}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
-          style={{ maxHeight: "200px" }}
+          rows={2}
+          className="w-full min-h-[3em] text-[1.2em] px-4 py-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+          style={{ maxHeight: "10em" }}
         />
       </div>
       <button
         type="submit"
         disabled={!message.trim() || disabled}
-        className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+        className="px-6 py-3 max-h-[5em] bg-blue-600 mb-[0.5em] text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
       >
         {disabled ? (
           <svg
@@ -71,14 +72,7 @@ export default function ChatInput({ onSendMessage, disabled }) {
             />
           </svg>
         ) : (
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-            />
-          </svg>
+          <SendHorizontal className="w-[1.5em] h-[1.5em]" />
         )}
       </button>
     </form>

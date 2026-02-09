@@ -29,31 +29,29 @@ export default function TaskLayout({ taskCategory, title, taskFilter }) {
   // Apply filter based on category
   const filteredTasks = taskFilter ? tasks.filter(taskFilter) : tasks;
 
-  // Get priority color (same as dashboard)
   const getPriorityColor = (priority) => {
     switch(priority?.toLowerCase()) {
       case 'high':
-        return 'text-red-600'; // Red for high priority (dashboard style)
+        return '#42ADE2'; // Blue for high priority (as per requirements)
       case 'extreme':
-        return 'text-red-600'; // Red for extreme priority (dashboard style)
+        return '#F21E1E'; // Red for extreme priority (as per requirements)
       case 'low':
-        return 'text-green-600'; // Green for low priority (dashboard style)
+        return '#22c55e'; // Green for low priority (as per requirements)
       default:
-        return 'text-gray-600'; // Default gray (dashboard style)
+        return '#A1A3AB'; // Default gray
     }
   };
 
-  // Get status color (same as dashboard)
   const getStatusColor = (status) => {
     switch(status?.toLowerCase()) {
       case 'completed':
-        return 'text-green-600'; // Green for completed (dashboard style)
+        return '#05A301'; // Green for completed
       case 'in progress':
-        return 'text-blue-600'; // Blue for in progress (dashboard style)
+        return '#0225FF'; // Blue for in progress
       case 'not started':
-        return 'text-red-600'; // Red for not started (dashboard style)
+        return '#F21E1E'; // Red for not started
       default:
-        return 'text-gray-600'; // Default gray (dashboard style)
+        return '#A1A3AB'; // Default gray
     }
   };
 
@@ -163,11 +161,11 @@ export default function TaskLayout({ taskCategory, title, taskFilter }) {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-50 p-[2vw] text-[1vw] font-sans text-slate-800">
-      <div className="grid grid-cols-1 h-full lg:grid-cols-[1.5fr_2fr] gap-[2vw]">
+    <div className="h-screen sm:min-h-full bg-zinc-50 p-[2vw] text-[1vw] font-sans text-slate-800">
+      <div className="grid grid-cols-1 grid-rows-[1.5fr_1fr] md:grid-rows-1 min-h-full md:grid-cols-[1.5fr_2fr] gap-[2vw]">
 
         {/* LEFT COLUMN — TASK LIST PANEL */}
-        <section className="bg-white rounded-[1.5em] p-[2vw] shadow-sm border border-slate-100">
+        <section className="bg-white rounded-[1.5em] h-full overflow-y-scroll p-[2vw] shadow-sm border border-slate-100">
           <h2 className="text-[1.2em] font-semibold mb-[1vw]">{title}</h2>
 
           <div className="space-y-[1vw]">
@@ -182,26 +180,16 @@ export default function TaskLayout({ taskCategory, title, taskFilter }) {
                   onClick={() => setSelectedTask(task)}
                   className="flex cursor-pointer gap-[1em] items-start border border-[#A1A3AB] rounded-[1em] p-[1vw] mb-[1vw] last:mb-0 hover:bg-gray-50 transition-colors"
                 >
-                  {/* Left Indicator (Status Dot) */}
-                  <div
-                    className="w-[0.6em] h-[0.6em] rounded-full mt-[0.7em]"
-                    style={{
-                      backgroundColor: task.is_completed ? '#05A301' :
-                              task.status?.toLowerCase() === 'in progress' ? '#0225FF' :
-                              task.status?.toLowerCase() === 'not started' ? '#F21E1E' :
-                              getPriorityColor(task.priority)
-                    }}
-                  />
-
-                  {/* Task Content Section */}
+                  <Circle className='w-[1.4em]  mt-[0.5em] h-[1.4em]' style={{color: task.is_completed ? '#05A301' : getPriorityColor(task.priority)}} />
+                  {/* Task Content */}
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-[1em] font-medium truncate">{task.title}</h3>
-                    <p className="text-[0.85em] text-gray-500 mt-[0.2vw] line-clamp-2">
-                      {task.description?.substring(0, 100)}{task.description?.length > 100 ? '...' : ''}
+                    <h3 className="text-[1.4em] font-medium truncate">{task.title}</h3>
+                    <p className="text-[1em] text-gray-500 mt-1 line-clamp-2">
+                      {task.description?.slice(0,50)}...
                     </p>
-                    <div className="flex flex-col gap-[0.25em] mt-[0.5vw] text-[0.75em] text-gray-600">
-                      <span>Priority: <span className="font-medium" style={{color: task.is_completed ? '#05A301' : getPriorityColor(task.priority)}}>{task.priority}</span></span>
-                      <span>Status: <span className="font-medium" style={{color: getStatusColor(task.status)}}>{task.status}</span></span>
+                    <div className="flex flex-col  gap-[0.2em] mt-[0.5vw] text-[1em] text-black">
+                      <span>Priority: <span className="font-medium" style={{color: getPriorityColor(task.priority)}}>{task.priority}</span></span>
+                      <span>Status: <span className='font-medium' style={{color: getStatusColor(task.status)}}>{task.status}</span></span>
                       <span>Created on: {task.createdDate || 'Unknown'}</span>
                     </div>
                   </div>
@@ -233,13 +221,13 @@ export default function TaskLayout({ taskCategory, title, taskFilter }) {
                 <div className="md:w-2/3 flex flex-col justify-center space-y-3">
                   <div className="text-[1em]">
                     <span className="font-medium text-gray-700">Priority:</span>{' '}
-                    <span className={getPriorityColor(selectedTask.priority)}>
+                    <span style={{color: getPriorityColor(selectedTask.priority)}}>
                       {selectedTask.priority || 'Medium'}
                     </span>
                   </div>
                   <div className="text-[1em]">
                     <span className="font-medium text-gray-700">Status:</span>{' '}
-                    <span className={getStatusColor(selectedTask.status)}>
+                    <span style={{color: getStatusColor(selectedTask.status)}}>
                       {selectedTask.status || 'Not Started'}
                     </span>
                   </div>
