@@ -1,0 +1,134 @@
+# Default values for todo-chat-bot.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Global settings
+global:
+  namespace: todo-app
+
+# Application settings - deploying both backend and frontend
+app:
+  backend:
+    replicaCount: 1
+    image:
+      repository: todo-backend
+      tag: latest
+      pullPolicy: IfNotPresent
+    service:
+      type: ClusterIP
+      port: 8000
+      targetPort: 8000
+    containerPort: 8000
+    resources: {}
+    # livenessProbe and readinessProbe
+    livenessProbe:
+      httpGet:
+        path: /health
+        port: 8000
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      timeoutSeconds: 3
+      failureThreshold: 3
+    readinessProbe:
+      httpGet:
+        path: /health
+        port: 8000
+      initialDelaySeconds: 5
+      periodSeconds: 5
+      timeoutSeconds: 3
+      failureThreshold: 3
+    env:
+      - name: DATABASE_URL
+        value: "postgresql://postgres:password@postgres-service:5432/todo_db"
+      - name: REDIS_URL
+        value: "redis://redis-service:6379"
+      - name: PORT
+        value: "8000"
+      - name: SECRET_KEY
+        value: "TMTCyLPEJ3RHBSAy1QWAAZ1EpYm2LcA9"
+      - name: ALGORITHM
+        value: "HS256"
+      - name: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "30"
+
+  frontend:
+    replicaCount: 1
+    image:
+      repository: todo-frontend
+      tag: latest
+      pullPolicy: IfNotPresent
+    service:
+      type: ClusterIP
+      port: 80
+      targetPort: 3000
+    containerPort: 3000
+    resources: {}
+    livenessProbe:
+      httpGet:
+        path: /
+        port: 3000
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      timeoutSeconds: 3
+      failureThreshold: 3
+    readinessProbe:
+      httpGet:
+        path: /
+        port: 3000
+      initialDelaySeconds: 5
+      periodSeconds: 5
+      timeoutSeconds: 3
+      failureThreshold: 3
+    env:
+      - name: NEXT_PUBLIC_API_URL
+        value: "http://backend-service:8000/api"
+      - name: NODE_ENV
+        value: "production"
+
+# Service account configuration
+serviceAccount:
+  create: true
+  automount: true
+  name: ""
+
+# Pod annotations and labels
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+# Node selectors, tolerations, and affinity
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+# Ingress configuration for exposing services
+ingress:
+  enabled: true
+  className: "minikube"
+  annotations:
+    # Add annotations for minikube if needed
+    # nginx.ingress.kubernetes.io/rewrite-target: /
+  hosts:
+    - host: todo.local
+      paths:
+        - path: /api
+          pathType: Prefix
+          service:
+            name: backend-service
+            port: 8000
+        - path: /
+          pathType: Prefix
+          service:
+            name: frontend-service
+            port: 80
+  tls: []

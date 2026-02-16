@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+
+
+@theme{
+  --breakpoint-mobile: 420px
+}
+html,body{
+  font-size: 10px;
+}
+
+@media (width < 1420px) {
+    html,body{
+        font-size: 9.5px;
+    }
+}
+@media (width < 1320px) {
+    html,body{
+        font-size: 9px;
+    }
+}
+@media (width < 1220px) {
+    html,body{
+        font-size: 8.5px;
+    }
+}
+@media (width < 1120px) {
+    html,body{
+        font-size: 8px;
+    }
+}
+@media (width < 1020px) {
+    html,body{
+        font-size: 7.5px;
+    }
+}
+@media (width < 920px) {
+    html,body{
+        font-size: 7px;
+    }
+}
+@media (width < 820px) {
+    html,body{
+        font-size: 6.5px;
+    }
+}
+@media (width < 720px) {
+    html,body{
+        font-size: 6px;
+    }
+}
+@media (width < 620px) {
+    html,body{
+        font-size: 5.5px;
+    }
+}
+@media (width < 520px) {
+    html,body{
+        font-size: 5px;
+    }
+}
+@media (width < 420px) {
+    html,body{
+        font-size: 4.5px;
+    }
+}
+@media (width < 320px) {
+    html,body{
+        font-size: 4px;
+    }
+}
+
